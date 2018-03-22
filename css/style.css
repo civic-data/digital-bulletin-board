@@ -1,0 +1,23 @@
+body{font-family:Georgia,'Times New Roman',Times,serif;font-size:18px;}
+#seal-header img{width:100px}
+.full-width{width:100%}
+.align-center{text-align:center;}
+.align-left{text-align:left;}
+.align-right{text-align:right;}
+#agenda-container{margin:0 auto;width:75%}
+  .agenda{margin:50px auto;}
+  .agenda:first-child{margin:0px auto 50px;}
+    .hbody,.hbody-chair,.hlocation,.htime{border-bottom:2px dotted #666;}
+    .hbody span,.hlocation span{background-color:white;margin-left:-1px;padding:0px 2px 3px;}
+    .hbody-chair span,.htime span{background-color:white;margin-right:-1px;padding:0px 2px 3px;}
+    .hbody{text-decoration:underline;}
+    .hbody-chair{}
+    .hlocation{}
+    .htime{}
+    .hevent-items{}
+      ul.event-list-items{max-height:150px;overflow-y:scroll;}
+      ul.event-list-items.scrollable::-webkit-scrollbar {width:10px;}
+      ul.event-list-items.scrollable::-webkit-scrollbar-track{background:#f1f1f1;}
+      ul.event-list-items.scrollable::-webkit-scrollbar-thumb{background:#888;}
+      ul.event-list-items.scrollable::-webkit-scrollbar-thumb:hover{background:#555;}
+  hr{margin:0 auto;width:15%;}
