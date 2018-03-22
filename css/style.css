@@ -14,7 +14,7 @@ body{font-family:Georgia,'Times New Roman',Times,serif;font-size:18px;}
     .hbody-chair{}
     .hlocation{}
     .htime{}
-    .hevent-items{}
+    .hevent-items{padding:25px 20px;}
       ul.event-list-items{max-height:150px;overflow-y:scroll;}
       ul.event-list-items.scrollable::-webkit-scrollbar {width:10px;}
       ul.event-list-items.scrollable::-webkit-scrollbar-track{background:#f1f1f1;}
