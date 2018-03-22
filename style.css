@@ -1,0 +1,43 @@
+body{font-family:Georgia,'Times New Roman',Times,serif;margin:50px;}
+.full-width{width:100%;}
+.align-center{text-align:center;}
+.align-left{text-align:left;}
+.align-right{text-align:right;}
+#seal-header{width:100%}
+  #seal-header img{width:100px;}
+#today,#agenda-container{margin:0 auto;width:70%;}
+  .agenda:first-child{margin: 0px auto;}
+  .agenda{margin: 100px auto;}
+  .hdate{font-weight:bold;}
+  .hbody{text-decoration:underline;}
+  .hbody,.hchair{border-bottom:2px dotted #666;}
+    .hbody span,.hchair span{background-color: white;padding:0px 2px 3px;}
+    .hbody span{margin-left:-1px}
+    .hchair span{margin-right:-1px}
+  .heventItems{min-height:101%;}
+    .event-item-list{max-height:150px; overflow-y:scroll;}
+  .hlocation,.htime{border-bottom:2px dotted #666;}
+    .hlocation span,.htime span{background-color: white;padding:0px 2px 3px;}
+    .hlocation span{margin-left:-1px}
+    .htime span{margin-right:-1px}
+  .htime{}
+/* hr{margin:35px auto;width:65%;} */
+
+ul.scrollable::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+ul.scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Handle */
+ul.scrollable::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+ul.scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
