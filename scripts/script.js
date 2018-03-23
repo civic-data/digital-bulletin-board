@@ -1,9 +1,9 @@
-var password = prompt("Please enter password", "").split("");
-var crypt = password.map(function(n){return n.charCodeAt();});
-var doublecrypt = crypt.map(function(m){return m^250;});
-function getSum(t,i) {return t+i;};
-console.log(doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))
-if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1476){
+// var password = prompt("Please enter password", "").split("");
+// var crypt = password.map(function(n){return n.charCodeAt();});
+// var doublecrypt = crypt.map(function(m){return m^250;});
+// function getSum(t,i) {return t+i;};
+// if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1476){
+  if(1476){
   Date.prototype.stdTimezoneOffset = function() {
     var jan = new Date(this.getFullYear(), 0, 1);
     var jul = new Date(this.getFullYear(), 6, 1);
@@ -130,7 +130,7 @@ if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1476){
 
   $(window).on("load", function(){
     $(window).scrollTop(0);
-    var stop;
+    var stop, scrolling = false;
     function scrollToBottom(){
       $('html, body').animate({ 
         scrollTop: $(document).height()-$(window).height()}, 
@@ -143,12 +143,18 @@ if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1476){
       );
     };
     $(window).on("click",function(){
-      clearTimeout(stop);
-      $('html, body').stop();
-      stop = setTimeout(function(){
-        scrollToBottom();
-      },10000);
+      if(scrolling){
+        clearTimeout(stop);
+        $('html, body').stop();
+        stop = setTimeout(function(){
+          scrollToBottom();
+        },10000);
+      };
     });
-    scrollToBottom();  
+    $("#seal-header img").click(function(e){
+e.stopPropagation();
+      scrolling = true;
+      scrollToBottom();
+    });
   });
 };
