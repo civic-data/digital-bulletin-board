@@ -127,6 +127,7 @@ $.ajax({
 
 $(window).on("load", function(){
   $(window).scrollTop(0);
+  var stop;
   function scrollToBottom(){
     $('html, body').animate({ 
       scrollTop: $(document).height()-$(window).height()}, 
@@ -138,17 +139,12 @@ $(window).on("load", function(){
       }
     );
   };
-  // $(window).on("scroll",function(){
-  //   if($(window).scrollTop() === ($(document).height()-$(window).height())){
-  //     $(window).scrollTop(0);
-  //     scrollToBottom();
-  //   };
-  // });
   $(window).on("click",function(){
+    clearTimeout(stop);
     $('html, body').stop();
-    setTimeout(function(){
+    stop = setTimeout(function(){
       scrollToBottom();
-    },3000);
+    },10000);
   });
   scrollToBottom();  
 });
