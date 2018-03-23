@@ -14,9 +14,7 @@
   }
 
   const apiToken = "Uvxb0j9syjm3aI8h46DhQvnX5skN4aSUL0x_Ee3ty9M.ew0KICAiVmVyc2lvbiI6IDEsDQogICJOYW1lIjogIk5ZQyByZWFkIHRva2VuIDIwMTcxMDI2IiwNCiAgIkRhdGUiOiAiMjAxNy0xMC0yNlQxNjoyNjo1Mi42ODM0MDYtMDU6MDAiLA0KICAiV3JpdGUiOiBmYWxzZQ0KfQ";
-  var date;
-  new Date().dst() ?  date = new Date(new Date().getTime() - 4 * 3600 * 1000) : date = new Date(new Date().getTime() - 5 * 3600 * 1000)
-  var startDate, startYear = date.getFullYear(), startMonth = date.getMonth()+1, startDay = date.getDate(), agendaLink;
+  var date = new Date(), startYear = date.getFullYear(), startMonth = date.getMonth()+1, startDay = date.getDate(), startDate;
   var addZero = function(n) {return (n < 10) ? ("0" + n) : n;}
   startDate = startYear+"-"+addZero(startMonth)+"-"+addZero(startDay);
   $.ajax({
@@ -82,11 +80,7 @@
           dataType:"jsonp",
           url:"https://webapi.legistar.com/v1/nyc/Bodies/"+$(this).attr("data-body-id")+"?token="+apiToken,
           success:function(committee){
-            if(committee.BodyId === 1){
-              $(".hbody-chair[data-body-id="+committee.BodyId+"]").html("<span><strong>Stated Meeting</strong></span>");
-            } else {
-              $(".hbody-chair[data-body-id="+committee.BodyId+"]").html("<span><strong>"+committee.BodyContactFullName.trim()+"</strong>, Chairperson</span>");
-            };
+            committee.BodyId === 1 ? $(".hbody-chair[data-body-id="+committee.BodyId+"]").html("<span><strong>Stated Meeting</strong></span>") : $(".hbody-chair[data-body-id="+committee.BodyId+"]").html("<span><strong>"+committee.BodyContactFullName.trim()+"</strong>, Chairperson</span>");
           }
         });
       });
@@ -118,9 +112,7 @@
           },
           complete:function(){
             $(".event-list-items").each(function(){
-              if($(this).height() === 150){
-                $(this).addClass("scrollable");
-              };
+              if($(this).height() === 150){$(this).addClass("scrollable");};
             });
           }
         });
@@ -152,9 +144,14 @@
       };
     });
     $("#seal-header img").click(function(e){
-e.stopPropagation();
-      scrolling = true;
-      scrollToBottom();
+      e.stopPropagation();
+      scrolling = !scrolling;
+      if(scrolling){
+        scrollToBottom();
+      } else {
+        clearTimeout(stop);
+        $('html, body').stop();
+      };
     });
   });
 };
