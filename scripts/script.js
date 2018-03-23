@@ -30,20 +30,20 @@ if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1476){
         if(hearing.EventAgendaStatusName.toLowerCase() !== "draft"){
           if(hearing.EventAgendaStatusName.toLowerCase() === "deferred"){
             var html = `
-            <div class="agenda full-width">
-              <p class="hdate align-center"><strong>`+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+`</strong></p>
+            <div class="agenda full-width" id="event-`+hearing.EventId+`">
+              <p class="hdate align-center"><strong class="deferred">`+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+`</strong>&nbsp;<span class="clean">DEFERRED</span></p>
               <table class="full-width">
                 <tr>
-                  <td class="hbody align-left"><span>`+hearing.EventBodyName+`</span></td>
-                  <td class="hbody-chair align-right" data-body-id=`+hearing.EventBodyId+`></td>
+                  <td class="hbody align-left deferred"><span>`+hearing.EventBodyName+`</span></td>
+                  <td class="hbody-chair align-right deferred" data-body-id=`+hearing.EventBodyId+`></td>
                 </tr>
                 <tr>
-                  <td id="heventid-`+hearing.EventId+`" class="hevent-items" data-event-id=`+hearing.EventId+` colspan=2>
+                  <td id="heventid-`+hearing.EventId+`" class="hevent-items deferred" data-event-id=`+hearing.EventId+` colspan=2>
                   </td>
                 </tr>
                 <tr>
-                  <td class="hlocation align-left"><span>`+hearing.EventLocation+`</span></td>
-                  <td class="htime align-right"><span><s>`+hearing.EventTime+`</s> Deferred</span></td>
+                  <td class="hlocation align-left deferred"><span>`+hearing.EventLocation+`</span></td>
+                  <td class="htime align-right deferred"><span><s>`+hearing.EventTime+`</s></span></td>
                 </tr>
               </table>
             </div>
@@ -51,7 +51,7 @@ if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1476){
             `;
           } else {
             var html = `
-            <div class="agenda full-width">
+            <div class="agenda full-width" id="event-`+hearing.EventId+`">
               <p class="hdate align-center"><strong>`+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+`</strong></p>
               <table class="full-width">
                 <tr>
@@ -70,8 +70,8 @@ if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1476){
             </div>
             <hr>
             `;
-            $("#agenda-container").append(html);
           };
+          $("#agenda-container").append(html);
         };
       });
     },
@@ -102,9 +102,18 @@ if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1476){
               if(item.EventItemMatterFile === null){
                 $list.append("<li><strong>"+item.EventItemTitle+"</strong></li>");
               } else {
-                $list.append("<li><strong>"+item.EventItemMatterFile+"</strong>  &#8212; "+item.EventItemTitle+"</li>");
-              }
-            })
+                var itemBullet = item.EventItemTitle.split("\n")
+                var html = ""
+                itemBullet.forEach(function(bullet){
+                  if(bullet.trim() !== "" && bullet.toLowerCase().includes("jointly")){
+                    $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+bullet+"</em></small")
+                  } else if (bullet.trim() !== ""){
+                    html += "<li>"+bullet+"</li>";
+                  };
+                });
+                $list.append("<li><strong>"+item.EventItemMatterFile+"</strong>:<ul>"+html+"</ul></li>");
+              };
+            });
             $("#heventid-"+items[0].EventItemEventId).append($list);
           },
           complete:function(){
