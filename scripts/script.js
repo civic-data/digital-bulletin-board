@@ -124,3 +124,31 @@ $.ajax({
     });
   }
 });
+
+$(window).on("load", function(){
+  $(window).scrollTop(0);
+  function scrollToBottom(){
+    $('html, body').animate({ 
+      scrollTop: $(document).height()-$(window).height()}, 
+      (($(document).height()-$(window).height()-$(window).scrollTop())*30),
+      "linear",
+      function(){
+        $(window).scrollTop(0);
+        scrollToBottom();
+      }
+    );
+  };
+  // $(window).on("scroll",function(){
+  //   if($(window).scrollTop() === ($(document).height()-$(window).height())){
+  //     $(window).scrollTop(0);
+  //     scrollToBottom();
+  //   };
+  // });
+  $(window).on("click",function(){
+    $('html, body').stop();
+    setTimeout(function(){
+      scrollToBottom();
+    },3000);
+  });
+  scrollToBottom();  
+});
