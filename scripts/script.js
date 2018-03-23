@@ -2,7 +2,8 @@ var password = prompt("Please enter password", "").split("");
 var crypt = password.map(function(n){return n.charCodeAt();});
 var doublecrypt = crypt.map(function(m){return m^250;});
 function getSum(t,i) {return t+i;};
-if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1284){
+console.log(doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))
+if((doublecrypt.reduce(getSum) ^ crypt.reduce(getSum))=== 1476){
   Date.prototype.stdTimezoneOffset = function() {
     var jan = new Date(this.getFullYear(), 0, 1);
     var jul = new Date(this.getFullYear(), 6, 1);
