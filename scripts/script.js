@@ -22,6 +22,19 @@
     dataType:"jsonp",
     url:"https://webapi.legistar.com/v1/nyc/events?token="+apiToken+"&$filter=EventDate+ge+datetime%27"+startDate+"%27&$orderby=EventDate+asc",
     success:function(hearings){
+      hearings.sort(function(a,b){
+        var aDate = a.EventDate.split("T")[0].split("-");
+        var aTime = a.EventTime.split(" ")[0].split(":");
+        var aAMPM = a.EventTime.split(" ")[1];
+        aAMPM === "PM" && parseInt(aTime[0]) !== 12 ? aTime[0] = parseInt(aTime[0]) + 12 : aTime[0];
+        var bDate = b.EventDate.split("T")[0].split("-");
+        var bTime = b.EventTime.split(" ")[0].split(":");
+        var bAMPM = b.EventTime.split(" ")[1];
+        bAMPM === "PM" && parseInt(bTime[0]) !== 12 ? bTime[0] = parseInt(bTime[0]) + 12 : bTime[0];
+        var aMS = new Date(aDate[0],(parseInt(aDate[1])-1),aDate[2],aTime[0],aTime[1]); 
+        var bMS = new Date(bDate[0],(parseInt(bDate[1])-1),bDate[2],bTime[0],bTime[1]);
+        return aMS.getTime() - bMS.getTime();
+      });
       hearings.forEach(function(hearing){
         date = new Date(hearing.EventDate.split("T")[0].split("-")[0],hearing.EventDate.split("T")[0].split("-")[1]-1,hearing.EventDate.split("T")[0].split("-")[2])
         hearing.EventAgendaFile !== null ? agendaLink = hearing.EventAgendaFile : agendaLink = "#";
@@ -153,5 +166,8 @@
         $('html, body').stop();
       };
     });
+    setTimeout(function(){
+      location.reload();
+    },3600000);
   });
 };
