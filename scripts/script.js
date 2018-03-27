@@ -166,8 +166,5 @@
         $('html, body').stop();
       };
     });
-    setTimeout(function(){
-      location.reload();
-    },3600000);
   });
 };
