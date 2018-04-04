@@ -6,7 +6,7 @@ body{font-family:Georgia,'Times New Roman',Times,serif;font-size:18px;}
 .deferred{text-decoration:line-through!important;}
 .clean{text-decoration:none!important;}
   #seal-header{margin:100px 0 50px;}
-    #seal-header img{width:100px;}
+    #seal-header img{cursor:pointer;width:100px;}
   #agenda-container{margin:0 auto;width:75%}
     .agenda{margin:50px auto;}
     .agenda:first-child{margin:0px auto 50px;}

@@ -1,14 +1,5 @@
-Date.prototype.stdTimezoneOffset = function() {
-  var jan = new Date(this.getFullYear(), 0, 1);
-  var jul = new Date(this.getFullYear(), 6, 1);
-  return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
-}
-Date.prototype.dst = function() {
-  return this.getTimezoneOffset() < this.stdTimezoneOffset();
-}
-
-const apiToken = "Uvxb0j9syjm3aI8h46DhQvnX5skN4aSUL0x_Ee3ty9M.ew0KICAiVmVyc2lvbiI6IDEsDQogICJOYW1lIjogIk5ZQyByZWFkIHRva2VuIDIwMTcxMDI2IiwNCiAgIkRhdGUiOiAiMjAxNy0xMC0yNlQxNjoyNjo1Mi42ODM0MDYtMDU6MDAiLA0KICAiV3JpdGUiOiBmYWxzZQ0KfQ";
-var date = new Date(), startYear = date.getFullYear(), startMonth = date.getMonth()+1, startDay = date.getDate(), startDate;
+const apiToken = "Uvxb0j9syjm3aI8h46DhQvnX5skN4aSUL0x_Ee3ty9M.ew0KICAiVmVyc2lvbiI6IDEsDQogICJOYW1lIjogIk5ZQyByZWFkIHRva2VuIDIwMTcxMDI2IiwNCiAgIkRhdGUiOiAiMjAxNy0xMC0yNlQxNjoyNjo1Mi42ODM0MDYtMDU6MDAiLA0KICAiV3JpdGUiOiBmYWxzZQ0KfQ", todayDate = new Date();
+var startYear = todayDate.getFullYear(), startMonth = todayDate.getMonth()+1, startDay = todayDate.getDate(), startDate, html;
 var addZero = function(n) {return (n < 10) ? ("0" + n) : n;}
 startDate = startYear+"-"+addZero(startMonth)+"-"+addZero(startDay);
 $.ajax({
@@ -16,6 +7,7 @@ $.ajax({
   dataType:"jsonp",
   url:"https://webapi.legistar.com/v1/nyc/events?token="+apiToken+"&$filter=EventDate+ge+datetime%27"+startDate+"%27&$orderby=EventDate+asc",
   success:function(hearings){
+    //turn times into milliseconds and sort
     hearings.sort(function(a,b){
       var aDate = a.EventDate.split("T")[0].split("-");
       var aTime = a.EventTime.split(" ")[0].split(":");
@@ -32,9 +24,11 @@ $.ajax({
     hearings.forEach(function(hearing){
       date = new Date(hearing.EventDate.split("T")[0].split("-")[0],hearing.EventDate.split("T")[0].split("-")[1]-1,hearing.EventDate.split("T")[0].split("-")[2])
       hearing.EventAgendaFile !== null ? agendaLink = hearing.EventAgendaFile : agendaLink = "#";
+      //Only show meetings not in draft
       if(hearing.EventAgendaStatusName.toLowerCase() !== "draft"){
+        //If meeting deferred everything is struckthrough
         if(hearing.EventAgendaStatusName.toLowerCase() === "deferred"){
-          var html = `
+          html = `
           <div class="agenda full-width" id="event-`+hearing.EventId+`">
             <p class="hdate align-center"><strong class="deferred">`+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+`</strong>&nbsp;<span class="clean">DEFERRED</span></p>
             <table class="full-width">
@@ -55,7 +49,7 @@ $.ajax({
           <hr>
           `;
         } else {
-          var html = `
+          html = `
           <div class="agenda full-width" id="event-`+hearing.EventId+`">
             <p class="hdate align-center"><strong>`+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+`</strong></p>
             <table class="full-width">
@@ -75,12 +69,14 @@ $.ajax({
           </div>
           <hr>
           `;
-        };
+        }; // end inner if else from line 30
+        //post all agendas into container
         $("#agenda-container").append(html);
-      };
-    });
-  },
+      }; //end outer if from line 28
+    }); //end hearings.each from line 24
+  }, //end success from line 9
   complete:function(){
+    //Fill in correct chair person's name
     $(".hbody-chair").each(function(){
       $.ajax({
         type:"GET",
@@ -92,6 +88,7 @@ $.ajax({
       });
     });
 
+    //Fill box with associated agenda items
     $(".hevent-items").each(function(){
       $.ajax({
         type:"GET",
@@ -101,6 +98,7 @@ $.ajax({
           var $list = $("<ul class='event-list-items'>");
           items.forEach(function(item){
             if(item.EventItemMatterFile === null){
+              //If hearing has multiple committees append the end of hearing location
               if (item.EventItemTitle.toLowerCase().includes("jointly")){
                 $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+item.EventItemTitle+"</em></small")
               } else {
@@ -110,6 +108,7 @@ $.ajax({
               var itemBullet = item.EventItemTitle.split("\n")
               var html = ""
               itemBullet.forEach(function(bullet){
+                //If hearing has multiple committees append the end of hearing location
                 if(bullet.trim() !== "" && bullet.toLowerCase().includes("jointly")){
                   $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+bullet+"</em></small")
                 } else if (bullet.trim() !== ""){
@@ -120,13 +119,14 @@ $.ajax({
             };
           });
           $("#heventid-"+items[0].EventItemEventId).append($list);
-        },
+        }, //end success from line 97
         complete:function(){
+          //If agenda item exceeds certain height, make it scrollabe
           $(".event-list-items").each(function(){
             if($(this).height() === 150){$(this).addClass("scrollable");};
           });
-        }
+        } //end success from line 123
       });
     });
-  }
+  } //end complete from line 78
 });
