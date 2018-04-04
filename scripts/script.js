@@ -1,6 +1,6 @@
 const apiToken = "Uvxb0j9syjm3aI8h46DhQvnX5skN4aSUL0x_Ee3ty9M.ew0KICAiVmVyc2lvbiI6IDEsDQogICJOYW1lIjogIk5ZQyByZWFkIHRva2VuIDIwMTcxMDI2IiwNCiAgIkRhdGUiOiAiMjAxNy0xMC0yNlQxNjoyNjo1Mi42ODM0MDYtMDU6MDAiLA0KICAiV3JpdGUiOiBmYWxzZQ0KfQ", todayDate = new Date();
 var startYear = todayDate.getFullYear(), startMonth = todayDate.getMonth()+1, startDay = todayDate.getDate(), startDate, html;
-var addZero = function(n) {return (n < 10) ? ("0" + n) : n;}
+var addZero = function(n) {return (n < 10) ? ("0" + n) : n;};
 startDate = startYear+"-"+addZero(startMonth)+"-"+addZero(startDay);
 $.ajax({
   type:"GET",
@@ -22,7 +22,7 @@ $.ajax({
       return aMS.getTime() - bMS.getTime();
     });
     hearings.forEach(function(hearing){
-      date = new Date(hearing.EventDate.split("T")[0].split("-")[0],hearing.EventDate.split("T")[0].split("-")[1]-1,hearing.EventDate.split("T")[0].split("-")[2])
+      date = new Date(hearing.EventDate.split("T")[0].split("-")[0],hearing.EventDate.split("T")[0].split("-")[1]-1,hearing.EventDate.split("T")[0].split("-")[2]);
       hearing.EventAgendaFile !== null ? agendaLink = hearing.EventAgendaFile : agendaLink = "#";
       //Only show meetings not in draft
       if(hearing.EventAgendaStatusName.toLowerCase() !== "draft"){
@@ -46,8 +46,7 @@ $.ajax({
               </tr>
             </table>
           </div>
-          <hr>
-          `;
+          <hr>`;
         } else {
           html = `
           <div class="agenda full-width" id="event-`+hearing.EventId+`">
@@ -67,8 +66,7 @@ $.ajax({
               </tr>
             </table>
           </div>
-          <hr>
-          `;
+          <hr>`;
         }; // end inner if else from line 30
         //post all agendas into container
         $("#agenda-container").append(html);
@@ -100,22 +98,21 @@ $.ajax({
             if(item.EventItemMatterFile === null){
               //If hearing has multiple committees append the end of hearing location
               if (item.EventItemTitle.toLowerCase().includes("jointly")){
-                $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+item.EventItemTitle+"</em></small")
+                $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+item.EventItemTitle+"</em></small");
               } else {
                 $list.append("<li><strong>"+item.EventItemTitle+"</strong></li>");
-              }
+              };
             } else {
-              var itemBullet = item.EventItemTitle.split("\n")
-              var html = ""
+              var itemBullet = item.EventItemTitle.split("\n"), innerHtml = "";
               itemBullet.forEach(function(bullet){
                 //If hearing has multiple committees append the end of hearing location
                 if(bullet.trim() !== "" && bullet.toLowerCase().includes("jointly")){
-                  $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+bullet+"</em></small")
+                  $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+bullet+"</em></small");
                 } else if (bullet.trim() !== ""){
-                  html += "<li>"+bullet+"</li>";
+                  innerHtml += "<li>"+bullet+"</li>";
                 };
               });
-              $list.append("<li><strong>"+item.EventItemMatterFile+"</strong>:<ul>"+html+"</ul></li>");
+              $list.append("<li><strong>"+item.EventItemMatterFile+"</strong>:<ul>"+innerHtml+"</ul></li>");
             };
           });
           $("#heventid-"+items[0].EventItemEventId).append($list);
