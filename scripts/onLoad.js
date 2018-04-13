@@ -22,10 +22,12 @@ $(window).on("load",function(){
 
   $(window).on("click",function(){
     if(scrolling){
+      $("#scroll-status").html("paused");
       clearTimeout(stop);
       $('html, body').stop();
       stop = setTimeout(function(){
         scrollToBottom();
+        $("#scroll-status").html("on");
       },10000);
     };
   });
@@ -34,10 +36,12 @@ $(window).on("load",function(){
     e.stopPropagation();
     scrolling = !scrolling;
     if(scrolling){
+      $("#scroll-status").html("on");
       scrollToBottom();
     } else {
       clearTimeout(stop);
       $('html, body').stop();
+      $("#scroll-status").html("off");
     };
   });
 });
