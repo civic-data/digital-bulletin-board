@@ -1,6 +1,6 @@
 body{font-family:Georgia,'Times New Roman',Times,serif;font-size:18px;}
 .full-width{width:100%}
-.v-middle{vertical-align:middle;}
+.v-middle{font-size:10px;vertical-align:middle;}
 .align-center{text-align:center;}
 .align-left{text-align:left;}
 .align-right{text-align:right;}
