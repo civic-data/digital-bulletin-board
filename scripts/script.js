@@ -97,10 +97,12 @@ $.ajax({
           items.forEach(function(item){
             if(item.EventItemMatterFile === null){
               //If hearing has multiple committees append the end of hearing location
-              if (item.EventItemTitle.toLowerCase().includes("jointly")){
-                $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+item.EventItemTitle+"</em></small");
-              } else {
-                $list.append("<li><strong>"+item.EventItemTitle+"</strong></li>");
+              if(item.EventItemTitle){
+                if (item.EventItemTitle.toLowerCase().includes("jointly")){
+                  $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+item.EventItemTitle+"</em></small");
+                } else {
+                  $list.append("<li><strong>"+item.EventItemTitle+"</strong></li>");
+                };
               };
             } else {
               var itemBullet = item.EventItemTitle.split("\n"), innerHtml = "";
