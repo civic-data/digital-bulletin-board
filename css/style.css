@@ -1,14 +1,15 @@
 body{font-family:Georgia,'Times New Roman',Times,serif;font-size:18px;}
 .full-width{width:100%}
+.v-middle{vertical-align:middle;}
 .align-center{text-align:center;}
 .align-left{text-align:left;}
 .align-right{text-align:right;}
 .deferred{text-decoration:line-through!important;}
 .clean{text-decoration:none!important;}
-  #scroll{background-color:rgba(0,0,0,.65);color:white;font-family:'Courier New',Courier,monospace;font-size:12px;left:0;padding:1px 3px;position:fixed;top:0;}
-    #scroll-status{}
+  #scroll{background-color:rgba(0,0,0,.65);color:white;cursor:pointer;font-family:'Courier New',Courier,monospace;font-size:12px;left:0;padding:1px 3px;padding-right:0px;position:fixed;top:0;}
+    #scroll-status{background-color:rgba(194,0,26,.5);padding:1px 3px;}
   #seal-header{margin:100px 0 50px;}
-    #seal-header img{cursor:pointer;width:100px;}
+    #seal-header img{width:100px;}
   #agenda-container{margin:0 auto;width:75%}
     .agenda{margin:50px auto;}
     .agenda:first-child{margin:0px auto 50px;}
