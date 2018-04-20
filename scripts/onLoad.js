@@ -1,5 +1,4 @@
 $(window).on("load",function(){
-  $(window).scrollTop(0);
   var stop, scrolling = false;
   var windowOpenTime = new Date();
   var refreshTime = new Date(windowOpenTime.getFullYear(),windowOpenTime.getMonth(),windowOpenTime.getDate(),(windowOpenTime.getHours()+1));
@@ -44,5 +43,8 @@ $(window).on("load",function(){
       $("#scroll-status").html("off <i class='fas fa-stop v-middle'></i>").css({"background-color":"rgba(194,0,26,.5)"});
     };
   });
-  $("#scroll").trigger("click");
+  setTimeout(function(){
+    $(window).scrollTop(0);
+    $("#scroll").trigger("click");
+  },100)
 });
