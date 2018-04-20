@@ -33,16 +33,16 @@ $.ajax({
             <p class="hdate align-center"><strong class="deferred">`+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+`</strong>&nbsp;<span class="clean">DEFERRED</span></p>
             <table class="full-width">
               <tr>
-                <td class="hbody align-left deferred"><span>`+hearing.EventBodyName+`</span></td>
-                <td class="hbody-chair align-right deferred" data-body-id=`+hearing.EventBodyId+`></td>
+                <td class="hbody align-left v-bottom deferred"><span>`+hearing.EventBodyName+`</span></td>
+                <td class="hbody-chair align-right v-bottom deferred" data-body-id=`+hearing.EventBodyId+`></td>
               </tr>
               <tr>
                 <td id="heventid-`+hearing.EventId+`" class="hevent-items deferred" data-event-id=`+hearing.EventId+` colspan=2>
                 </td>
               </tr>
               <tr>
-                <td class="hlocation align-left deferred"><span>`+hearing.EventLocation+`</span></td>
-                <td class="htime align-right deferred"><span><s>`+hearing.EventTime+`</s></span></td>
+                <td class="hlocation align-left v-bottom deferred"><span>`+hearing.EventLocation+`</span></td>
+                <td class="htime align-right v-bottom deferred"><span><s>`+hearing.EventTime+`</s></span></td>
               </tr>
             </table>
           </div>
@@ -53,16 +53,16 @@ $.ajax({
             <p class="hdate align-center"><strong>`+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+`</strong></p>
             <table class="full-width">
               <tr>
-                <td class="hbody align-left"><span>`+hearing.EventBodyName+`</span></td>
-                <td class="hbody-chair align-right" data-body-id=`+hearing.EventBodyId+`></td>
+                <td class="hbody align-left v-bottom"><span>`+hearing.EventBodyName+`</span></td>
+                <td class="hbody-chair align-right v-bottom" data-body-id=`+hearing.EventBodyId+`></td>
               </tr>
               <tr>
                 <td id="heventid-`+hearing.EventId+`" class="hevent-items" data-event-id=`+hearing.EventId+` colspan=2>
                 </td>
               </tr>
               <tr>
-                <td class="hlocation align-left"><span>`+hearing.EventLocation+`</span></td>
-                <td class="htime align-right"><span>`+hearing.EventTime+`</span></td>
+                <td class="hlocation align-left v-bottom"><span>`+hearing.EventLocation+`</span></td>
+                <td class="htime align-right v-bottom"><span>`+hearing.EventTime+`</span></td>
               </tr>
             </table>
           </div>
