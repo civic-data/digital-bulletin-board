@@ -29,45 +29,9 @@ $.ajax({
       if(hearing.EventAgendaStatusName.toLowerCase() !== "draft"){
         //If meeting deferred everything is struckthrough
         if(hearing.EventAgendaStatusName.toLowerCase() === "deferred"){
-          html = `
-          <div class="agenda full-width" id="event-`+hearing.EventId+`">
-            <p class="hdate align-center"><strong class="deferred">`+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+`</strong>&nbsp;<span class="clean">DEFERRED</span></p>
-            <table class="full-width">
-              <tr>
-                <td class="hbody align-left v-bottom deferred"><span>`+hearing.EventBodyName+`</span></td>
-                <td class="hbody-chair align-right v-bottom deferred" data-body-id=`+hearing.EventBodyId+`></td>
-              </tr>
-              <tr>
-                <td id="heventid-`+hearing.EventId+`" class="hevent-items deferred" data-event-id=`+hearing.EventId+` colspan=2>
-                </td>
-              </tr>
-              <tr>
-                <td class="hlocation align-left v-bottom deferred"><span>`+hearing.EventLocation+`</span></td>
-                <td class="htime align-right v-bottom deferred"><span><s>`+hearing.EventTime+`</s></span></td>
-              </tr>
-            </table>
-          </div>
-          <hr>`;
+          html = '<div class="agenda full-width" id="event-'+hearing.EventId+'"><p class="hdate align-center"><strong class="deferred">'+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+'</strong>&nbsp;<span class="clean">DEFERRED</span></p><table class="full-width"><tr><td class="hbody align-left v-bottom deferred"><span>'+hearing.EventBodyName+'</span></td><td class="hbody-chair align-right v-bottom deferred" data-body-id='+hearing.EventBodyId+'></td></tr><tr><td id="heventid-'+hearing.EventId+'" class="hevent-items deferred" data-event-id='+hearing.EventId+' colspan=2></td></tr><tr><td class="hlocation align-left v-bottom deferred"><span>'+hearing.EventLocation+'</span></td><td class="htime align-right v-bottom deferred"><span><s>'+hearing.EventTime+'</s></span></td></tr></table></div><hr>';
         } else {
-          html = `
-          <div class="agenda full-width" id="event-`+hearing.EventId+`">
-            <p class="hdate align-center"><strong>`+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+`</strong></p>
-            <table class="full-width">
-              <tr>
-                <td class="hbody align-left v-bottom"><span>`+hearing.EventBodyName+`</span></td>
-                <td class="hbody-chair align-right v-bottom" data-body-id=`+hearing.EventBodyId+`></td>
-              </tr>
-              <tr>
-                <td id="heventid-`+hearing.EventId+`" class="hevent-items" data-event-id=`+hearing.EventId+` colspan=2>
-                </td>
-              </tr>
-              <tr>
-                <td class="hlocation align-left v-bottom"><span>`+hearing.EventLocation+`</span></td>
-                <td class="htime align-right v-bottom"><span>`+hearing.EventTime+`</span></td>
-              </tr>
-            </table>
-          </div>
-          <hr>`;
+          html = '<div class="agenda full-width" id="event-'+hearing.EventId+'"><p class="hdate align-center"><strong>'+date.toLocaleDateString("en-US",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })+'</strong></p><table class="full-width"><tr><td class="hbody align-left v-bottom"><span>'+hearing.EventBodyName+'</span></td><td class="hbody-chair align-right v-bottom" data-body-id='+hearing.EventBodyId+'></td></tr><tr><td id="heventid-'+hearing.EventId+'" class="hevent-items" data-event-id='+hearing.EventId+' colspan=2></td></tr><tr><td class="hlocation align-left v-bottom"><span>'+hearing.EventLocation+'</span></td><td class="htime align-right v-bottom"><span>'+hearing.EventTime+'</span></td></tr></table></div><hr>';
         }; // end inner if else from line 30
         //post all agendas into container
         $("#agenda-container").append(html);
