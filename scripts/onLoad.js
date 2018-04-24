@@ -60,4 +60,5 @@ $(window).on("load",function(){
     $(window).scrollTop(0);
     $("#scroll").trigger("click");
   },100)
+  console.log("end onload script")
 });

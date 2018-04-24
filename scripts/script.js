@@ -2,6 +2,7 @@ const apiToken = "Uvxb0j9syjm3aI8h46DhQvnX5skN4aSUL0x_Ee3ty9M.ew0KICAiVmVyc2lvbi
 var startYear = todayDate.getFullYear(), startMonth = todayDate.getMonth()+1, startDay = todayDate.getDate(), startDate, html;
 var addZero = function(n) {return (n < 10) ? ("0" + n) : n;};
 startDate = startYear+"-"+addZero(startMonth)+"-"+addZero(startDay);
+console.log("before ajax")
 $.ajax({
   type:"GET",
   dataType:"jsonp",
