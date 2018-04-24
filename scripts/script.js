@@ -3,6 +3,14 @@ var startYear = todayDate.getFullYear(), startMonth = todayDate.getMonth()+1, st
 var addZero = function(n) {return (n < 10) ? ("0" + n) : n;};
 startDate = startYear+"-"+addZero(startMonth)+"-"+addZero(startDay);
 console.log("before ajax")
+String.prototype.included = function(substring){
+  var string = this.split(" ");
+  if (string.indexOf(substring) !== -1){
+    return true;
+  } else {
+    return false;
+  }
+}
 $.ajax({
   type:"GET",
   dataType:"jsonp",
@@ -63,7 +71,7 @@ $.ajax({
             if(item.EventItemMatterFile === null){
               //If hearing has multiple committees append the end of hearing location
               if(item.EventItemTitle){
-                if (item.EventItemTitle.toLowerCase().includes("jointly")){
+                if (item.EventItemTitle.toLowerCase().included("jointly")){
                   $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+item.EventItemTitle+"</em></small");
                 } else {
                   $list.append("<li><strong>"+item.EventItemTitle+"</strong></li>");
@@ -73,7 +81,7 @@ $.ajax({
               var itemBullet = item.EventItemTitle.split("\n"), innerHtml = "";
               itemBullet.forEach(function(bullet){
                 //If hearing has multiple committees append the end of hearing location
-                if(bullet.trim() !== "" && bullet.toLowerCase().includes("jointly")){
+                if(bullet.trim() !== "" && bullet.toLowerCase().included("jointly")){
                   $("#event-"+item.EventItemEventId+" .hlocation span").append(" - <small><em>"+bullet+"</em></small");
                 } else if (bullet.trim() !== ""){
                   innerHtml += "<li>"+bullet+"</li>";
