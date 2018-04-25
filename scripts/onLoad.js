@@ -13,8 +13,7 @@ $(window).on("load",function(){
       (($(document).height()-$(window).height()-$(window).scrollTop())*30),
       "linear",
       function(){
-        $(window).scrollTop(0);
-        scrollToBottom();
+        window.location.href = window.location.href;
       }
     );
   };
