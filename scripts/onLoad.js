@@ -67,11 +67,13 @@ $(window).on("load",function(){
 
   $("#suggestion-send").click(function(e){
     e.stopPropagation();
-    $("#scroll-status").html("on <i class='fas fa-play v-middle'></i>").css({"background-color":"rgba(38,171,1,.5)"});
-    scrollToBottom();
-    $("#suggestion-box").hide();
-    $("body").css("overflow","hidden")
-    scrolling = true;
+    if($("textarea").val().trim()!==""){
+      $("#scroll-status").html("on <i class='fas fa-play v-middle'></i>").css({"background-color":"rgba(38,171,1,.5)"});
+      scrollToBottom();
+      $("#suggestion-box").hide();
+      $("body").css("overflow","hidden")
+      scrolling = true;
+    }
   });
 
   $("#suggestion-close").click(function(e){
