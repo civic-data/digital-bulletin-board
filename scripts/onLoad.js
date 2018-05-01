@@ -55,9 +55,36 @@ $(window).on("load",function(){
     };
   });
 
+  $("#suggestions").click(function(e){
+    e.stopPropagation();
+    clearTimeout(stop);
+    $('html, body').stop();
+    $("#scroll-status").html("off <i class='fas fa-stop v-middle'></i>").css({"background-color":"rgba(194,0,26,.5)"});
+    $("#suggestion-box").show();
+    $("body").css("overflow","hidden")
+    scrolling = false;
+  });
+
+  $("#suggestion-send").click(function(e){
+    e.stopPropagation();
+    $("#scroll-status").html("on <i class='fas fa-play v-middle'></i>").css({"background-color":"rgba(38,171,1,.5)"});
+    scrollToBottom();
+    $("#suggestion-box").hide();
+    $("body").css("overflow","hidden")
+    scrolling = true;
+  });
+
+  $("#suggestion-close").click(function(e){
+    e.stopPropagation();
+    $("#scroll-status").html("on <i class='fas fa-play v-middle'></i>").css({"background-color":"rgba(38,171,1,.5)"});
+    scrollToBottom();
+    $("#suggestion-box").hide();
+    $("body").css("overflow","visible")
+    scrolling = true;
+  });
+
   setTimeout(function(){
     $(window).scrollTop(0);
     $("#scroll").trigger("click");
-  },100)
-  console.log("end onload script")
+  },100);
 });

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="icon" href="images/favicon.ico">
   <title>Digital Bulletin Board</title>
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <script src="vendor/fontawesome-free-5.0.10/svg-with-js/js/fontawesome-all.min.js"></script>
 </head>
 <body>
@@ -17,9 +17,21 @@
     <p class="align-right" id="today"></p>
   </div>
   <div id="agenda-container"></div>
+  <div id="suggestions">Suggestions? <i class="fas fa-comment v-middle"></i></div>
+  <div id="suggestion-box">
+    <div id="suggestion-form">
+      <h3>Send your suggestion/feedback</h3>
+      <form action="https://formspree.io/jc.nycc.122018@gmail.com"method="POST">
+        <textarea name="message" rows="10" style="font-size:14px;resize:none;width:99%;"></textarea>
+        <br>
+        <input id="suggestion-send" type="submit" value="Submit">
+      </form>
+      <div id="suggestion-close">&times;</div>
+    </div>
+  </div>
   <script src="scripts/jquery-3.3.1.min.js"></script>
   <script src="vendor/jquery.mobile.custom/jquery.mobile.custom.min.js"></script>
-  <script src="scripts/script.js?v=6"></script>
-  <script src="scripts/onLoad.js?v=10"></script>
+  <script src="scripts/script.js?v=7"></script>
+  <script src="scripts/onLoad.js?v=11"></script>
 </body>
 </html>
