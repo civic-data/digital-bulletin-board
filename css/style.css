@@ -9,6 +9,9 @@ body{font-family:Georgia,'Times New Roman',Times,serif;font-size:18px;}
 .clean{text-decoration:none!important;}
   #scroll{background-color:rgba(0,0,0,.65);color:white;cursor:pointer;font-family:'Courier New',Courier,monospace;font-size:14px;left:0;padding:1px 3px;padding-right:0px;position:fixed;top:0;}
     #scroll-status{background-color:rgba(194,0,26,.5);padding:1px 3px;}
+  #touch{border-color: transparent #228AE6 transparent transparent;border-style: solid;border-width: 0 175px 175px 0;color: white;font-family: 'Courier New',Courier,monospace;font-size: 14px;height: 0;margin-left:9em;padding-right: 0px;position: fixed;top: 0;right: 0;width: 0;}
+    #touch span{font-size: 27px;position: absolute;top: 5px;right: -65px;}
+    #touch p{color: white;margin-right: -12em;position: absolute;right: 0;text-align: right;top: -7px;width: 100px;}
   #suggestions{background-color: #BE4BDB;color: white;cursor: pointer;font-family:sans-serif;font-size: 15px;right: 0;padding: 3px;position: fixed;top: 0;}
     #suggestions .fa-comment{font-size:15px;vertical-align:top;}
     #suggestion-box{background-color:rgba(0,0,0,.6);display:none;height:100%;left:0;padding-top:100px;position:fixed;top:0;width:100%;z-index:1;}
