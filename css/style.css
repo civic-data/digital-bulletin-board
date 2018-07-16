@@ -37,3 +37,7 @@ body{font-family:Georgia,'Times New Roman',Times,serif;font-size:18px;}
         ul.event-list-items.scrollable::-webkit-scrollbar-thumb{background:#888;}
         ul.event-list-items.scrollable::-webkit-scrollbar-thumb:hover{background:#555;}
     hr{margin:0 auto;width:15%;}
+    
+::-webkit-scrollbar { 
+  display: none; 
+}
